@@ -26,6 +26,12 @@ public class pokaz extends HttpServlet {
             request.setAttribute("jdg", jdg);
             request.getRequestDispatcher("pokaz.jsp").forward(request, response);
 
+        } catch (RuntimeException e) {
+            String msg = "Wystąpił błąd przy połączeniu z usługą osobową.<br>" + e.getMessage() + "<br>";
+            request.setAttribute("msg", msg);
+            request.getRequestDispatcher("error.jsp").forward(request, response);
+
+
         } finally {
             out.close();
         }

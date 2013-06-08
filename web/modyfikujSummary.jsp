@@ -3,7 +3,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Usługa osobowa</title>
+        <title>Usługa JDG</title>
         <link href="css/StyleSheet1.css" rel="stylesheet" type="text/css">
         <link href="css/admin.css" rel="stylesheet" type="text/css">
         <!--<script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>-->
@@ -17,21 +17,7 @@
             </div>
             <div id="pageInside" >
                 <div class="wrap">
-                    <h1 class="h2_decoration underline">Zmodyfikowano JDG o numerze ${nip}</h1><br />
-                    <table id="table-6">
-                        <tbody>        
-                            <tr><td>Nazwa:</td><td><input type="text" name="nazwa" value="${nazwa}"/></td></tr>
-                            <tr><td>NIP:</td><td><input type="text" name="nip" value="${nip}"/></td></tr>
-                            <tr><td>Właściciel:</td><td><input type="text" name="wlasciciel" value="${osoba_info}" /></td></tr>
-                            <tr><td>Rodzaj działalności:</td><td><input type="text" name="rodzaj" value="${rodzaj}" /></td></tr>
-                            <tr><td>Indeks krajowego:</td><td><input type="text" name="indeks" value="${indeks}" /></td></tr>
-                            <tr><td>Data założenia: </td><td><input type="text" name="data_zal" value="${dataZal}" /></td></tr>
-                            <tr><td>Pierwsza działalność : </td><td><select  name="czyPierwsza" >
-                                        <option>Tak</option>
-                                        <option>Nie</option>
-                                    </select> </td></tr>
-                        </tbody>
-                    </table>
+                    <h1 class="h2_decoration underline">${info}</h1><br />
 
                     <br />
                     <a href="index.jsp">Powrót</a>

@@ -17,7 +17,8 @@
             </div>
             <div id="pageInside" >
                 <div class="wrap">
-                    <h1 class="h2_decoration underline">Usunieto JDG o numerze</h1><br />
+                    <h1 class="h2_decoration underline">BŁĄD!</h1><br />
+                    <p>${msg}</p>
                     <br />
                     <a href="index.jsp">Powrót</a>
                     <br />

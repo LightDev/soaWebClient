@@ -7,12 +7,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import rsi.JDG;
 import rsi.webClient;
 
-@WebServlet(name = "modyfikuj", urlPatterns = {"/modyfikuj"})
-public class modyfikuj extends HttpServlet {
+@WebServlet(name = "modyfikujSummary", urlPatterns = {"/modyfikujSummary"})
+public class modyfikujSummary extends HttpServlet {
 
     private webClient wc = new webClient();
 
@@ -21,23 +20,28 @@ public class modyfikuj extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         try {
+            String nip = (String) request.getSession().getAttribute("nip2");
+            System.out.println("nip2 " + nip);
+            JDG jdg = new JDG(
+                    request.getParameter("nip"),
+                    request.getParameter("nazwa"),
+                    request.getParameter("wlasciciel"),
+                    (String) request.getSession().getAttribute("dataZalozenia"),
+                    (String) request.getSession().getAttribute("krs"),
+                    (String) request.getSession().getAttribute("rodzajDzialalnosci"),
+                    (String) request.getSession().getAttribute("adresSiedziby"),
+                    (request.getSession().getAttribute("czyPierwsza").equals("Tak")) ? true : false);
+            String s = "";
+            try {
+                s = wc.getHandle().modyfikuj(jdg);
+            } catch (RuntimeException e) {
+                String msg = "Wystąpił błąd przy połączeniu z usługą osobową.<br>" + e.getMessage() + "<br>";
+                request.setAttribute("msg", msg);
+                request.getRequestDispatcher("error.jsp").forward(request, response);
+            }
+            request.setAttribute("info", s);
+            request.getRequestDispatcher("modyfikujSummary.jsp").forward(request, response);
 
-            JDG jdg = wc.getHandle().pobierz(request.getParameter("nip"));
-
-            HttpSession session = request.getSession();
-            System.out.println("jdg.date " + jdg.dataZalozenia);
-            session.setAttribute("nip2", request.getParameter("nip"));
-            //request.setAttribute("nip2", request.getParameter("nip"));
-            request.setAttribute("nazwa", jdg.nazwa);
-            request.setAttribute("nip", jdg.nip);
-            request.setAttribute("wlasciciel", jdg.wlasciciel);
-            session.setAttribute("dataZalozenia", jdg.dataZalozenia);
-            session.setAttribute("krs", jdg.krs);
-            session.setAttribute("rodzajDzialalnosci", jdg.rodzajDzialalnosci);
-            session.setAttribute("adresSiedziby", jdg.adresSiedziby);
-            session.setAttribute("czyPierwsza", jdg.czyPierwsza);
-            //session.setAttribute("jdg", newJdg);
-            request.getRequestDispatcher("modyfikuj.jsp").forward(request, response);
 
         } finally {
             out.close();

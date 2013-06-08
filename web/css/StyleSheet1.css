@@ -75,6 +75,12 @@ body {
     -moz-box-sizing:content-box;
     -webkit-box-sizing:content-box; 
 }*/
+.invisible-when-folded{
+    display: none;
+}
+#personInfo{
+    display: none;
+}
 select
 {
     box-sizing: border-box;
